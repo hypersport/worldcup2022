@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: "0 0 20-30 11 *"
     - cron: "0 0 1-20 12 *"
+  # Run manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   Calendar-Publisher:
