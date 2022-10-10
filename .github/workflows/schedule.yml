@@ -1,0 +1,40 @@
+name: FIFA World Cup Qatar 2022
+
+on:
+  schedule:
+    - cron: "0 0 20-30 11 *"
+    - cron: "0 0 1-20 12 *"
+
+jobs:
+  Calendar-Publisher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests icalendar
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run Python
+        run: |
+          python main.py
+      - name: Commit Files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git commit -m "Update World Cup 2022 Calendar" -a
+      - name: Push Files
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.RELEASE_TOKEN }}
+      - name: Release Files
+        uses: elgohr/Github-Release-Action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          args: WorldCup2022Calendar
