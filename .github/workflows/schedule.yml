@@ -33,7 +33,7 @@ jobs:
       - name: Push Files
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.RELEASE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Release Files
         uses: elgohr/Github-Release-Action@master
         env:
