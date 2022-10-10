@@ -37,9 +37,9 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Release Files
-        uses: elgohr/Github-Release-Action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          title: WorldCup2022Calendar
+      # - name: Release Files
+        # uses: elgohr/Github-Release-Action@master
+        # env:
+          # GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        # with:
+          # args: WorldCup2022Calendar
