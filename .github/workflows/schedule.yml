@@ -1,6 +1,9 @@
 name: FIFA World Cup Qatar 2022
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "0 0 20-30 11 *"
     - cron: "0 0 1-20 12 *"
@@ -39,4 +42,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          args: WorldCup2022Calendar
+          title: WorldCup2022Calendar
