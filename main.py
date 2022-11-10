@@ -11,7 +11,7 @@ def get_urls() -> list:
         '11-28', '11-29', '11-30', '12-01', '12-02', '12-03', '12-04', '12-05',
         '12-06', '12-08', '12-09', '12-10', '12-13', '12-14', '12-16', '12-17'
     ]
-    base_url = 'https://tiyu.baidu.com/api/match/%E4%B8%96%E7%95%8C%E6%9D%AF/live/date/2022-{}/direction/after?from='
+    base_url = 'https://tiyu.baidu.com/api/match/%E4%B8%96%E7%95%8C%E6%9D%AF/live/date/2022-{}/direction/after'
 
     for day in game_days:
         urls.append(base_url.format(day))
@@ -25,6 +25,7 @@ def parse_data(data: dict) -> dict:
     score1 = '' if data['leftLogo']['score'] == '-' else data['leftLogo']['score']
     score2 = '' if data['rightLogo']['score'] == '-' else data['rightLogo']['score']
     d['summary'] = f'{name1} VS {name2} - {score1} : {score2}' if score1 and score2 else f'{name1} VS {name2}'
+    d['summary'] += f'\n{data["matchName"]}'
     d['dtstart'] = datetime.datetime.strptime(
         data['startTime'], '%Y-%m-%d %H:%M:%S')
     d['dtend'] = d['dtstart'] + datetime.timedelta(hours=2)
@@ -72,6 +73,7 @@ def get_calendar(events) -> Calendar:
     cal.add('prodid', '-//Hypersport//hypersport.club//')
     cal.add('version', '2.0')
     cal.add('method', 'PUBLISH')
+    cal.add('X-WR-TIMEZONE', 'Asia/Shanghai')
     cal.add('x-wr-calname', '2022 卡塔尔世界杯')
     for event in events:
         cal.add_component(event)
