@@ -107,11 +107,10 @@ if __name__ == '__main__':
 
 ### 比赛信息:
 
-  ||||||||
-  |:---:|:---|:---|:---:|---:|---:|:---:|
+  |:---:|:---|:---|:---:|---:|---:|:---:|:---:|
 '''
     with open('./README.md', 'w') as f:
         for info in data:
-            content += f"  |{num}|{info['leftLogo']['name']}|{info['leftLogo']['score']}| : |{info['rightLogo']['score']}|{info['rightLogo']['name']}|{info['matchName']}|\n"
+            content += f"  |{num}|{info['leftLogo']['name']}|{info['leftLogo']['score']}| : |{info['rightLogo']['score']}|{info['rightLogo']['name']}|{info['matchName']}|{info['startTime'][:-3]}|\n"
             num += 1
         f.write(content)
